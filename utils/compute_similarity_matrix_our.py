@@ -86,7 +86,9 @@ def compute_USR(mol_pos):
     distances_to_centroid = torch.norm(mol_pos - centroid, dim=1)
     farthest_point = mol_pos[torch.argmax(distances_to_centroid)]
     closest_point = mol_pos[torch.argmin(distances_to_centroid)]
-    farfromfarthest_point = mol_pos[torch.argmax(farthest_point)]
+    
+    distances_from_farthest = torch.norm(mol_pos - farthest_point, dim=1)
+    farfromfarthest_point = mol_pos[torch.argmax(distances_from_farthest)]
     
     # Calculate the reference vector from centroid to the farthest point
     reference_vector = farthest_point - centroid
